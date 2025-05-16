@@ -9,7 +9,6 @@
 #*#
 xcuserdata
 .DS_Store
-build
 build-gcc
 *.pbxuser
 *.mode1v3
