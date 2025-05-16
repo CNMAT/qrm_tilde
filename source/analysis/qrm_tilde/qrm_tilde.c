@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025.  The Regents of the University of California (Regents).
+Copyright (c) 2022.  The Regents of the University of California (Regents).
 All Rights Reserved.
 
 Permission to use, copy, modify, and distribute this software and its
@@ -27,12 +27,15 @@ University of California, Berkeley.
 */
 //
 //  qrm~.c
-//  qrm_tilde
+//  vindex_tilde
+//  This is a sandbox attempt at returning a vector from a buffer at some specified (int) index.
+//  Load that buffer into FFTW, perform FFT, then do some peak finding and rough estimation/refinement of
+//  bin frequency. Output as a list of likely frequencies.
 //
-//  Created by Jeremy Wagner on 5/14/25.
+//  Created by Jeremy Wagner on 8/11/22.
 //
 
-#include "qrm~.h"
+#include "qrm_tilde.h" //probably not needed
 
 #include "ext.h"
 #include "ext_obex.h"
@@ -920,3 +923,4 @@ zero:
 //    outlet_float(x->f_out, 0.0);
     object_error((t_object*)x,"qrm:findMaxInBuffer: Error: did not get buffer.");
 }
+
