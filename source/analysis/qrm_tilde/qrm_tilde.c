@@ -27,13 +27,19 @@ University of California, Berkeley.
 */
 //
 //  qrm~.c
-//  vindex_tilde
-//  This is a sandbox attempt at returning a vector from a buffer at some specified (int) index.
-//  Load that buffer into FFTW, perform FFT, then do some peak finding and rough estimation/refinement of
-//  bin frequency. Output as a list of likely frequencies.
+//  qrm_tilde
+//  This object is designed to produce a "Quick Resonnant Model" of a sound.  Given a named input buffer~
+//  and an int index (cursor position) qrm~ analyzes the buffer contents to identify spectral peaks, refine
+//  the frequency estimates of those peaks and output a list of (frequency, amplitude) pairs suitable for
+//  use with CNMAT's sinusoids~ object. If the object receives a list of two ints (two indices within the
+//  buffer) it will identify the first peak within that range, analyze the spectral peaks at that position,
+//  refine those frequency estimates AND estimate a decay rate for each frequency over the selected window.
+//  The resulting list of (frequency, amplitude, decay-rate) triples suitable for use wiht CNMAT's
+//  resonators~ is output from the next outlet.
+//
 //
 //  Created by Jeremy Wagner on 8/11/22.
-//
+//  05/16/2025 : Initial Commit
 
 #include "qrm_tilde.h" //probably not needed
 
@@ -82,7 +88,7 @@ typedef struct _qrm {
     double *ap4;
     void *out;                  //outlet
 //    void *f_out;
-    void *slice_out;                //dump outlet
+    void *slice_out;            //dump outlet
     void *model_out;
     long fft_size;
     fftw_plan p;                //sinusoidal fftw plan
@@ -121,13 +127,17 @@ void qrm_set(t_qrm *x, t_symbol *s);
 void qrm_setvsize(t_qrm *x, long n);
 void qrm_getvsize(t_qrm *x);
 void qrm_set_fft_size(t_qrm *x, long n);
-void *qrm_new(t_symbol *s, long chan);
+t_max_err qrm_attr_set_fft_size(t_qrm *x, t_object *attr, long *argc, t_atom *argv);
+t_max_err qrm_attr_get_fft_size(t_qrm *x, t_object *attr, long *argc, t_atom **argv);
+void *qrm_new(t_symbol *s, long argc, t_atom* argv);
 void qrm_free(t_qrm *x);
 t_max_err qrm_notify(t_qrm *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void qrm_in1(t_qrm *x, long n);
 void qrm_assist(t_qrm *x, void *b, long m, long a, char *s);
 void qrm_dblclick(t_qrm *x);
 void qrm_set_thresh(t_qrm *x, double n);
+t_max_err qrm_attr_set_thresh(t_qrm *x, t_object *attr, long *argc, t_atom *argv);
+t_max_err qrm_attr_get_thresh(t_qrm *x, t_object *attr, long *argc, t_atom **argv);
 void qrm_bang(t_qrm *x);
 void qrm_list_out(t_qrm *x, double* a, long l, void* outlet);
 void qrm_list(t_qrm *x, t_symbol *msg, long argc, t_atom *argv);
@@ -141,7 +151,7 @@ static t_class *qrm_class;
 
 C74_EXPORT void ext_main(void *r)
 {
-    t_class *c = class_new("qrm~", (method)qrm_new, (method)qrm_free, sizeof(t_qrm), 0L, A_SYM, A_DEFLONG, 0);
+    t_class *c = class_new("qrm~", (method)qrm_new, (method)qrm_free, sizeof(t_qrm), 0L, A_GIMME, 0);
     class_addmethod(c, (method)qrm_dsp64, "dsp64", A_CANT, 0);
     class_addmethod(c, (method)qrm_set, "set", A_SYM, 0);
     class_addmethod(c, (method)qrm_in1, "in1", A_LONG, 0);
@@ -153,8 +163,24 @@ C74_EXPORT void ext_main(void *r)
     class_addmethod(c, (method)qrm_getvsize, "get_vector_size", A_DEFSYM, 0);
     class_addmethod(c, (method)qrm_set_fft_size, "fft_size", A_LONG, 0);
     class_addmethod(c, (method)qrm_set_thresh, "set_thresh", A_FLOAT, 0);
-    class_addmethod(c, (method)qrm_bang, "bang", A_CANT, 0);                  //for experimental purposes
+    class_addmethod(c, (method)qrm_bang, "bang", A_CANT, 0);
     class_addmethod(c, (method)qrm_list, "list", A_CANT, 0);
+
+    CLASS_ATTR_DOUBLE(c, "thresh", 0, t_qrm, thresh);
+    CLASS_ATTR_FILTER_MAX(c, "thresh", 0.0);
+    CLASS_ATTR_BASIC(c, "thresh", 0);
+    CLASS_ATTR_LABEL(c, "thresh", 0, "Exclusion Threshold");
+    CLASS_ATTR_ALIAS(c, "thresh", "threshold");
+    CLASS_ATTR_ACCESSORS(c, "thresh", qrm_attr_get_thresh, qrm_attr_set_thresh);
+    
+    CLASS_ATTR_LONG(c, "fft_size", 0, t_qrm, fft_size);
+    CLASS_ATTR_BASIC(c, "fft_size", 0);
+    CLASS_ATTR_LABEL(c, "fft_size", 0, "FFT Size");
+    CLASS_ATTR_ACCESSORS(c, "fft_size", qrm_attr_get_fft_size, qrm_attr_set_fft_size);
+
+    
+
+    
     class_dspinit(c);
     class_register(CLASS_BOX, c);
     qrm_class = c;
@@ -548,6 +574,12 @@ void qrm_setvsize(t_qrm *x, long n)
     }
 }
 
+void qrm_getvsize(t_qrm *x)
+{
+    outlet_int(x->out, x->sample_vector_size);
+    object_post((t_object*)x,"Sample Vector Size is %d", x->sample_vector_size);
+}
+
 void qrm_set_fft_size(t_qrm *x, long n)
 {
     if(n>0){
@@ -635,11 +667,23 @@ void qrm_set_fft_size(t_qrm *x, long n)
     }
 }
 
-void qrm_getvsize(t_qrm *x)
+t_max_err qrm_attr_set_fft_size(t_qrm *x, t_object *attr, long *argc, t_atom *argv)
 {
-    outlet_int(x->out, x->sample_vector_size);
-    object_post((t_object*)x,"Sample Vector Size is %d", x->sample_vector_size);
+    qrm_set_fft_size(x, atom_getlong(argv));
+    return 0;
 }
+
+t_max_err qrm_attr_get_fft_size(t_qrm *x, t_object *attr, long *argc, t_atom **argv)
+{
+    char alloc;
+    atom_alloc(argc, argv, &alloc);
+    atom_setlong(*argv,x->fft_size);
+    return 0;
+}
+
+
+
+
 
 void qrm_in1(t_qrm *x, long n)
 {
@@ -689,6 +733,22 @@ void qrm_set_thresh(t_qrm *x, double n)
     }
 }
 
+t_max_err qrm_attr_set_thresh(t_qrm *x, t_object *attr, long *argc, t_atom *argv)
+{
+    double a = atom_getfloat(argv);
+    qrm_set_thresh(x, a);
+    return 0;
+}
+
+t_max_err qrm_attr_get_thresh(t_qrm *x, t_object *attr, long *argc, t_atom **argv)
+{
+    char alloc;
+    double thresh = 0;
+    atom_alloc(argc, argv, &alloc);
+    atom_setfloat(*argv, x->thresh);
+    return 0;
+}
+
 //eventually, I'd like the bang method to find the first peak in the buffer and return the resonance at that point. For now, it outputs the last frame
 void qrm_bang(t_qrm *x)
 {
@@ -716,7 +776,7 @@ void qrm_list_out(t_qrm *x, double* a, long l, void* outlet)
     outlet_list(outlet, 0L, l, list);
 }
 
-void *qrm_new(t_symbol *s, long chan)
+void *qrm_new(t_symbol *s, long argc, t_atom* argv)
 {
     t_qrm *x = object_alloc(qrm_class);
     dsp_setup((t_pxobject *)x, 1);
@@ -726,10 +786,10 @@ void *qrm_new(t_symbol *s, long chan)
     x->model_out = outlet_new((t_object *)x, NULL); //outlet for models
     x->slice_out = outlet_new((t_object *)x, NULL);     //outlet for slices
     outlet_new((t_object *)x, "signal");        //left outlet
-    qrm_set(x, s);
-    qrm_in1(x,chan);
+    qrm_set(x, atom_getsym(argv));
+    qrm_in1(x, 0);                              //default to left channel
     x->sr = sys_getsr();                        //initially, adopt the system sample rate. We will reset later.
-    post("qrm: SR = %f", x->sr);
+    post("qrm: SR = %d", (int)x->sr);
     x->fft_size = 4096;
     
     x->in = (double *) fftw_malloc(sizeof(double) * (x->fft_size));
@@ -769,6 +829,8 @@ void *qrm_new(t_symbol *s, long chan)
     x->num_peaks = 0;
     x->window_function = malloc(sizeof(double)*((int)x->fft_size));
     hann_window_gen(x);
+    attr_args_process(x, (short)argc, argv);
+    
     
     
 //    //test exponential fitting
