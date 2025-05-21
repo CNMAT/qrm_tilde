@@ -9,7 +9,7 @@
       "guid" : "c134616044b93280a5f87bbfadb963948dcafebafed02b03ac0a420e960d1a27"
     }
   ],
-  "containerPath" : "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/qrm.xcodeproj",
+  "containerPath" : "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/qrm.xcodeproj",
   "continueBuildingAfterErrors" : false,
   "dependencyScope" : "workspace",
   "enableIndexBuildArena" : false,
@@ -34,9 +34,9 @@
       "buildIntermediatesPath" : "",
       "buildProductsPath" : "",
       "derivedDataPath" : "/Users/jlw_cnmat/Library/Developer/Xcode/DerivedData",
-      "indexDataStoreFolderPath" : "/Users/jlw_cnmat/Library/Developer/Xcode/DerivedData/qrm-akfybnedzgxyczggaepqfvrwsmxp/Index.noindex/DataStore",
+      "indexDataStoreFolderPath" : "/Users/jlw_cnmat/Library/Developer/Xcode/DerivedData/qrm-fvdungnylsiqrveqoeoshxxwidxg/Index.noindex/DataStore",
       "indexEnableDataStore" : true,
-      "indexPCHPath" : "/Users/jlw_cnmat/Library/Developer/Xcode/DerivedData/qrm-akfybnedzgxyczggaepqfvrwsmxp/Index.noindex/PrecompiledHeaders",
+      "indexPCHPath" : "/Users/jlw_cnmat/Library/Developer/Xcode/DerivedData/qrm-fvdungnylsiqrveqoeoshxxwidxg/Index.noindex/PrecompiledHeaders",
       "pchPath" : ""
     },
     "configurationName" : "Debug",
@@ -50,6 +50,7 @@
       }
     }
   },
+  "qos" : "default",
   "schemeCommand" : "launch",
   "showNonLoggedProgress" : true,
   "useDryRun" : false,

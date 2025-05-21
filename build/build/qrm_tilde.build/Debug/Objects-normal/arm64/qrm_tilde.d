@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/qrm_tilde.c \
-  /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/qrm_tilde.h \
+  /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/qrm_tilde.c \
+  /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/qrm_tilde.h \
   /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/c74support/max-includes/ext.h \
   /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/c74support/max-includes/ext_infer_system.h \
   /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/c74support/max-includes/ext_common.h \

@@ -34,7 +34,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B4C30682374645FCA21D0C78 /* qrm_tilde.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F2E538CB376411E92FC9B21 /* qrm_tilde.c */; };
+		95B1BB742DDD38BB0036A6EF /* qrm_tilde.c in Sources */ = {isa = PBXBuildFile; fileRef = 95B1BB722DDD38BB0036A6EF /* qrm_tilde.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +58,9 @@
 		0B2877BFE4684223AC243A72 /* JitterAPI.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = JitterAPI.framework; path = "/Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/c74support/jit-includes/JitterAPI.framework"; sourceTree = "<absolute>"; };
 		2A9CD927ED0F4C2DBE41A469 /* qrm_tilde.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = qrm_tilde.h; path = source/analysis/qrm_tilde/qrm_tilde.h; sourceTree = SOURCE_ROOT; };
 		795638E0808F44618B045D50 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "/Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<absolute>"; };
-		7F2E538CB376411E92FC9B21 /* qrm_tilde.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = qrm_tilde.c; path = source/analysis/qrm_tilde/qrm_tilde.c; sourceTree = SOURCE_ROOT; };
 		83807E73FBB94F71BB39F97B /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = source/analysis/qrm_tilde/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		95B1BB722DDD38BB0036A6EF /* qrm_tilde.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = qrm_tilde.c; path = source/analysis/qrm_tilde/qrm_tilde.c; sourceTree = "<group>"; };
+		95B1BB732DDD38BB0036A6EF /* qrm_tilde.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = qrm_tilde.h; path = source/analysis/qrm_tilde/qrm_tilde.h; sourceTree = "<group>"; };
 		99E964EC4B87491F863AD692 /* qrm~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "qrm~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC39ABDA1003406EB699A118 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -135,6 +136,7 @@
 				83807E73FBB94F71BB39F97B /* CMakeLists.txt */,
 			);
 			name = qrm_tilde;
+			path = ../qrm_tilde;
 			sourceTree = "<group>";
 		};
 		AA14C988E1B343C599EE1B85 /* Resources */ = {
@@ -147,7 +149,8 @@
 		CDFF33B6D24A41A0937FD10B /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
-				7F2E538CB376411E92FC9B21 /* qrm_tilde.c */,
+				95B1BB722DDD38BB0036A6EF /* qrm_tilde.c */,
+				95B1BB732DDD38BB0036A6EF /* qrm_tilde.h */,
 			);
 			name = "Source Files";
 			sourceTree = "<group>";
@@ -245,7 +248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/MinSizeRel/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/RelWithDebInfo/qrm~.mxo 2>/dev/null\nfi\n";
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/MinSizeRel/qrm~.mxo 2>/dev/null\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  cp /Users/jlw_cnmat/Documents/GitHub/wagne342/max-sdk-base/script/PkgInfo \"/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/source/analysis/qrm_tilde/../../../externals/qrm~.mxo/Contents/PkgInfo\"\n  cd /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/source/analysis/qrm_tilde\n  codesign -s - -f --deep /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/RelWithDebInfo/qrm~.mxo 2>/dev/null\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -255,7 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4C30682374645FCA21D0C78 /* qrm_tilde.c in Sources */,
+				95B1BB742DDD38BB0036A6EF /* qrm_tilde.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +287,7 @@
 					arm64,
 				);
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/RelWithDebInfo;
+				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/RelWithDebInfo;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4785,7 +4788,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = .;
 				PRODUCT_NAME = "qrm~";
 				SECTORDER_FLAGS = "";
-				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
+				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 				WRAPPER_EXTENSION = mxo;
@@ -4877,7 +4881,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build;
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
 				USER_HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../fftw\"/**",
 					"\"$(SRCROOT)/../max-sdk-base\"",
@@ -4944,7 +4948,7 @@
 					arm64,
 				);
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals/MinSizeRel;
+				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals/MinSizeRel;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -9445,7 +9449,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = .;
 				PRODUCT_NAME = "qrm~";
 				SECTORDER_FLAGS = "";
-				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
+				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 				WRAPPER_EXTENSION = mxo;
@@ -9461,7 +9466,7 @@
 					arm64,
 				);
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals;
+				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -13962,7 +13967,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = .;
 				PRODUCT_NAME = "qrm~";
 				SECTORDER_FLAGS = "";
-				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
+				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 				WRAPPER_EXTENSION = mxo;
@@ -14028,7 +14034,7 @@
 					arm64,
 				);
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/externals;
+				CONFIGURATION_BUILD_DIR = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/externals;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -18528,7 +18534,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = .;
 				PRODUCT_NAME = "qrm~";
 				SECTORDER_FLAGS = "";
-				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
+				TARGET_TEMP_DIR = "/Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build/qrm_tilde.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 				WRAPPER_EXTENSION = mxo;
@@ -18570,7 +18577,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build;
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
 				USER_HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../fftw\"/**",
 					"\"$(SRCROOT)/../max-sdk-base\"",
@@ -18587,7 +18594,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
-				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build;
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
 				USER_HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../fftw\"/**",
 					"\"$(SRCROOT)/../max-sdk-base\"",
@@ -18605,7 +18612,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm/build/build;
+				SYMROOT = /Users/jlw_cnmat/Documents/GitHub/wagne342/qrm_tilde/build/build;
 				USER_HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../fftw\"/**",
 					"\"$(SRCROOT)/../max-sdk-base\"",
