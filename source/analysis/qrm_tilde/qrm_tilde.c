@@ -177,7 +177,7 @@ C74_EXPORT void ext_main(void *r)
     CLASS_ATTR_FILTER_MAX(c, "thresh", 65536);
     CLASS_ATTR_BASIC(c, "fft_size", 0);
     CLASS_ATTR_LABEL(c, "fft_size", 0, "FFT Size");
-    CLASS_ATTR_LABEL(c, "fft_size", "FFT_Size");
+    CLASS_ATTR_ALIAS(c, "fft_size", "FFT_Size");
     CLASS_ATTR_ACCESSORS(c, "fft_size", qrm_attr_get_fft_size, qrm_attr_set_fft_size);
 
     
